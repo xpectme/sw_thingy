@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Service Worker Test Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="app">
+    <h1>Startseite</h1>
+    <button type="button" hx-target=".app" hx-get="./test.html" hx-push-url="true" hx-swap="innerHTML">
+      Zur Testseite
+    </button>
+  </div>
+  <script src="https://unpkg.com/htmx.org@1.8.4"
+    integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV"
+    crossorigin="anonymous"></script>
+  <script>
+    window.addEventListener('load', () => {
+      // register service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then(function (registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(function (err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      }
+    });
+  </script>
+</body>
+
+</html>
